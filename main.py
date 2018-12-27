@@ -8,6 +8,7 @@ from telegram.ext import Dispatcher, MessageHandler, Filters, CommandHandler
 import getapod
 import getcomet
 import getmoon
+import getmercury
 
 # Load data from config.ini file
 config = configparser.ConfigParser()
@@ -79,6 +80,9 @@ def cometweekly(bot,update):
 def moonphase(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text= getmoon.get_moonphase())
     
+def mercury(bot,update):
+    bot.send_message(chat_id=update.message.chat_id, text= getmercury.get_mercury())
+    
 # New a dispatcher for bot
 dispatcher = Dispatcher(bot, None)
 
@@ -109,6 +113,10 @@ dispatcher.add_handler(cometweekly_handler)
 # moonphase command
 moonphase_handler = CommandHandler('moonphase', moonphase)
 dispatcher.add_handler(moonphase_handler)
+
+# mercury command
+mercury_handler = CommandHandler('mercury', mercury)
+dispatcher.add_handler(mercury_handler)
 
 
 if __name__ == "__main__":
